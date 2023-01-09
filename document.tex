@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 
-\usepackage{minted}
+% \usepackage{minted}
 \usepackage{amsmath, amsfonts, amsthm}
 \usepackage{listings, listings-rust}
 \usepackage{enumerate}
@@ -25,13 +25,13 @@
 }
 \urlstyle{same}
 
-\setminted{
-  frame=lines,
-  framesep=2mm,
-  baselinestretch=1.2,
-  fontsize=\footnotesize,
-  linenos
-}
+% \setminted{
+%   frame=lines,
+%   framesep=2mm,
+%   baselinestretch=1.2,
+%   fontsize=\footnotesize,
+%   linenos
+% }
 
 % !TeX spellcheck = en_GB
 % !TeX spellcheck = ru_RU
@@ -43,7 +43,7 @@
 \tableofcontents
 \newpage
 
-\section{Аппаратная реализация}
+\section{Аппаратная реализация1}
 \subsection{Raspberry pi 2b+}
 При разработке был изпользован Raspberry Pi 2 model B+.
 \begin{center}
@@ -159,6 +159,44 @@ Raspberry Pi питает от micro-USB, который подает 5V.
    и проверкой типов, автоматический форматировщик и многое другое.
 \end{description}
 
+\begin{description}
+  \item[Первая Версия] Первый стабильный релиз, Rust 1.0, был анонсирован в мае 2015.
+  \item[Владение] Владение — это набор правил, определяющих,
+   как программа на Rust управляет памятью. Все программы так 
+   или иначе должны использовать память компьютера во время работы.
+   В некоторых языках есть сборщики мусора, которые регулярно
+   отслеживают неиспользуемую память во время работы программы;
+   в других программист должен память явно выделять и освобождать.
+   В Rust используется третий подход: управление памятью происходит
+   через систему владения с набором правил, которые проверяются
+   компилятором. При нарушении любого из правил программа не будет
+   скомпилирована.
+   \begin{description}
+    \item[правило 1] У каждого значения в Rust есть владелец
+    \item[правило 2] У значения может быть только один владелец в один момент времени
+    \item[правило 3] Когда владелец покидает область видимости, значение удаляется 
+   \end{description}
+  
+  \item[Многопоточность] Безопасное и эффективное управление многопоточным
+   программированием — ещё одна из основных целей Rust. Поэтому он обеспечивает
+    решение с наилучшей производительностью в любой конкретной ситуации и будут
+     иметь меньше абстракций по сравнению с аппаратным обеспечением. Поэтому
+      Rust предлагает множество инструментов для моделирования проблем любым
+       способом, который подходит для вашей ситуации и требований.
+    \begin{description}
+    \item[способ 1] потоки для одновременного запуска нескольких фрагментов кода
+    \item[способ 2] передачи сообщений, где каналы передают сообщения между потоками
+    \item[способ 3] Многопоточность для совместно используемого состояния,
+     когда несколько потоков имеют доступ к некоторому фрагменту данных
+    \end{description}
+
+
+\end{description}
+
+
+
+
+
 \newpage
 
 \section{Реализация на языке Python}
@@ -177,18 +215,18 @@ Raspberry Pi питает от micro-USB, который подает 5V.
 
 \subsection{Код программы на Rust}
 
-\inputminted{rust}{code/main.rs}
+% \inputminted{rust}{code/main.rs}
 
-\inputminted{rust}{code/input.rs}
+% \inputminted{rust}{code/input.rs}
 
-\inputminted{rust}{code/engine.rs}
+% \inputminted{rust}{code/engine.rs}
 
-\subsection{Код программы на Python}
+% \subsection{Код программы на Python}
 
-\inputminted{python}{code/main.py}
+% \inputminted{python}{code/main.py}
 
-\inputminted{python}{code/input.py}
+% \inputminted{python}{code/input.py}
 
-\inputminted{python}{code/engine.py}
+% \inputminted{python}{code/engine.py}
 
 \end{document}
