@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 
-% \usepackage{minted}
+\usepackage{minted}
 \usepackage{amsmath, amsfonts, amsthm}
 \usepackage{listings, listings-rust}
 \usepackage{enumerate}
@@ -25,13 +25,13 @@
 }
 \urlstyle{same}
 
-% \setminted{
-%   frame=lines,
-%   framesep=2mm,
-%   baselinestretch=1.2,
-%   fontsize=\footnotesize,
-%   linenos
-% }
+\setminted{
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\footnotesize,
+  linenos
+}
 
 % !TeX spellcheck = en_GB
 % !TeX spellcheck = ru_RU
@@ -192,15 +192,78 @@ Raspberry Pi питает от micro-USB, который подает 5V.
 
 
 \end{description}
-
-
-
-
-
 \newpage
 
 \section{Реализация на языке Python}
-В рамках дополнительного задания нужно было реализовать программу c тем же функционалом на языке Python.
+В рамках дополнительного задания нужно было реализовать программу c тем же функционалом на языке Python и сравнить
+производительность с программой на языке Rust. Наша программа достаточно маленькая и в большинстве своем зависит от пользовательского
+ввода, так что произвести качественное сравнение представляется слишком трудным.
+Поэтому для сравнения языков была написана функция, которая считает значение числа $ \pi $ и сравнивает скорость работы.
+
+Программа на языке Rust:
+\begin{minted}{rust}
+  use std::time::Instant;
+
+  const N: u64 = 100_000_000;
+
+  fn calculate_pi(n_terms: u64) -> f64 {
+      let numerator = 4.0;
+      let mut denominator = 1.0;
+      let mut operation = 1.0;
+      let mut pi = 0.0;
+      for _ in 0..n_terms {
+          pi += operation * (numerator / denominator);
+          denominator += 2.0;
+          operation *= -1.0;
+      }
+      pi
+  }
+
+  fn main() {
+      let start = Instant::now();
+      let pi = calculate_pi(N);
+      let duration = start.elapsed();
+      println!("pi = {}", pi);
+      println!("Time elapsed: {:.2} seconds!", duration.as_secs_f64());
+  }
+\end{minted}
+
+Программа на языке Python:
+\begin{minted}{python}
+  
+from time import time
+
+N = 100_000_000
+
+def calculate_pi(n_terms: int) -> float:
+    numerator = 4.0
+    denominator = 1.0
+    operation = 1.0
+    pi = 0.0
+    for _ in range(n_terms):
+        pi += operation * (numerator / denominator)
+        denominator += 2.0
+        operation *= -1.0
+    return pi
+
+
+if __name__ == "__main__":
+    start = time()
+    pi = calculate_pi(N)
+    end = time()
+    print(f"pi = {pi}")
+    print(f"Time elapsed: {round((end - start), 2)} seconds!")
+\end{minted}
+
+После выполнения программ, мы получаем их время работы:
+\begin{minted}{python}
+  N = 100,000,000
+
+  Rust: 0.12 seconds
+  Python: 9.33 seconds
+\end{minted}
+
+По данным результатам можно увидеть что Rust почти в 80(!) раз быстрее чем Python.
 \newpage
 
 \section{Программное обеспечение}
@@ -215,18 +278,18 @@ Raspberry Pi питает от micro-USB, который подает 5V.
 
 \subsection{Код программы на Rust}
 
-% \inputminted{rust}{code/main.rs}
+ \inputminted{rust}{code/main.rs}
 
-% \inputminted{rust}{code/input.rs}
+ \inputminted{rust}{code/input.rs}
 
-% \inputminted{rust}{code/engine.rs}
+ \inputminted{rust}{code/engine.rs}
 
-% \subsection{Код программы на Python}
+ \subsection{Код программы на Python}
 
-% \inputminted{python}{code/main.py}
+ \inputminted{python}{code/main.py}
 
-% \inputminted{python}{code/input.py}
+ \inputminted{python}{code/input.py}
 
-% \inputminted{python}{code/engine.py}
+ \inputminted{python}{code/engine.py}
 
 \end{document}
